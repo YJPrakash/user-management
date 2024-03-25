@@ -60,10 +60,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "user-management:build:production"
+              "browserTarget": "user-management:build:production",
+              "port": 3001
             },
             "development": {
-              "browserTarget": "user-management:build:development"
+              "browserTarget": "user-management:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
@@ -93,6 +95,42 @@
           }
         }
       }
+    },
+    "njam-library": {
+      "projectType": "library",
+      "root": "njam-library",
+      "sourceRoot": "njam-library/src",
+      "prefix": "njam",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "njam-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "njam-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "njam-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "njam-library/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": "9337268f-90e9-49d4-90a7-84922548addf"
   }
 }
